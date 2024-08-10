@@ -5,7 +5,7 @@ window.onload = function() {
 
     if (itemId) {
       const decodedItemId = decodeURIComponent(itemId);
-      fetch("image/file.JSON")
+      fetch("image/file.json")
 .then(res => res.json())
 .then(data => {
 
