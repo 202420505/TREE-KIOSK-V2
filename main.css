@@ -1,0 +1,200 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+:root {
+  --padding: 10px;
+  --border-radius: 10px;
+  --black: #121213;
+  --gray: #3a3a3c;
+  --light-gray: #818384;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  max-height: 200px;
+}
+
+img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.select {
+  height: 250px;
+}
+
+.cart {
+  height: 300px;
+
+}
+.item {
+  width: 200px;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: var(--padding);
+  color: (--black);
+  border: 1px solid var(--black);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.item .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: calc(10px / 2);
+}
+
+.item img {
+  width: 100%;
+  border-radius: inherit;
+}
+
+#list,
+#cart-list {
+  column-count: 2;
+  flex: 1.5;
+  padding-right: var(--padding);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 100px;
+}
+
+.container {
+  position: relative; /* Establish a positioning context */
+}
+
+.scroll-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 50%;
+
+  box-sizing: border-box; /* Includes padding and border in the element's total width */
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-container {
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.scroll-list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.scroll-item {
+  flex: 0 0 auto;
+  width: 200px;
+  height: 100px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  white-space: normal;
+}
+
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+  border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--gray);
+  border: 4px solid var(--light-gray);
+  border-radius: var(--border-radius);
+}
+
+.floating-button {
+  display: flex;
+  position: fixed;
+  right: 10px;
+  bottom: 15px;
+  z-index: 999;
+}
+
+.move {
+  text-decoration-line: none;
+  float: left;
+  display: flex;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  /*사용자 설정 파트*/
+  font-weight: 700;
+  background-color: #00000000;
+  border: 2px solid #b67700;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.fixed {
+  position : fixed;
+bottom : 50px;
+right: 50px; 
+}
+
+.input {
+  width: 300px;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 200px;
+  margin: 20px auto;
+}
+.keypad button {
+  padding: 20px;
+  font-size: 18px;
+  width: 60px;
+
+}
+#numberDisplay {
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  width: 100%;
+  max-width: 200px;
+}
+
+.send-button {
+  display: none;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 200px;
+}
