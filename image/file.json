@@ -6,6 +6,6 @@
     {"key": 5, "name": "아이스 티", "image": "https://treekiosk.imgix.net/icetea.jpg" , "price": "3500"},
     {"key": 6, "name": "크로플", "image": "https://treekiosk.imgix.net/crofle.jpg" , "price": "3500"},
     {"key": 7, "name": "초콜릿 케이크 + 아메리카노 1잔", "image": "https://treekiosk.imgix.net/choco%2Bcake.jpg" , "price": "4500"},
-    {"key": 8, "name": "계란 프라이 + 베이컨", "image": "image/eggbacon.jpg" , "price": "4000"},
+    {"key": 8, "name": "계란 프라이 + 베이컨", "image": "https://treekiosk.imgix.net/eggbacon.jpg" , "price": "4000"},
     {"key": 9, "name": "초콜릿 케이크", "image": "https://treekiosk.imgix.net/chococake.jpg", "price": "3500"}
 ]

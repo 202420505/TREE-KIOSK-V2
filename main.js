@@ -11,7 +11,7 @@ function init() {
 
 
 function loaditem() {
-  fetch("/image/file.JSON")
+  fetch("/image/file.json")
   .then(res => res.json())
   .then(data => {
     let dataMarkup = '';
