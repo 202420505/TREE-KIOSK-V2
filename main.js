@@ -12,18 +12,26 @@ function init() {
 
 function loaditem() {
   fetch("/image/file.json")
-  .then(res => res.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
   .then(data => {
     let dataMarkup = '';
 
-    for(key in data) {
-      dataMarkup += display(data[key],key);
-      } 
+    for (key in data) {
+      dataMarkup += display(data[key], key);
+    }
 
-      ul.innerHTML = dataMarkup; 
+    ul.innerHTML = dataMarkup; 
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
 }
-  )
-}
+
 
 function display(child,key) {
 
