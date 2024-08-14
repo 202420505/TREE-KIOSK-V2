@@ -10,10 +10,22 @@ function init() {
   }
 
 
+<<<<<<< HEAD
   function loaditem() {
     fetch("/image/file.JSON")
       .then(res => res.json())
       .then(data => {
+=======
+function loaditem() {
+  fetch("/image/file.json")
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+>>>>>>> 6d304cfccd1a4ffc8e498aafb2ce671c15a5d246
         let ul = document.querySelector('ul');
         ul.innerHTML = ''; // 기존 내용을 초기화
   
