@@ -13,8 +13,8 @@ function init() {
 
         addItemToOrder({ id: itemId, image, description, price , quantity });
         saveOrder(); // Save order to localStorage
-        window.location.href = 'main.html'; 
-    }
+        window.close();
+        }
     cartshow();
 }
 
