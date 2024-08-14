@@ -4,6 +4,7 @@ window.addEventListener('load', init);
 
 function init() {
   home();
+  
     if (ul && ul.innerHTML.trim() === '') {
       loaditem();
     }
@@ -110,3 +111,20 @@ function switchPage(pageId) {
 function home() {
   switchPage('main');
 }
+
+function openwindow(name) {
+  var url = `${name}`;
+  var win = window.open(url, '_blank');
+  win.focus();
+}
+
+
+window.addEventListener("message", function(event) {
+  // 메시지의 출처 확인 (도메인이 동일한지 확인)
+  if (event.origin !== window.location.origin) {
+      return;
+  }
+if(event.data === "home") {
+  window.location.href = `index.html`;
+}
+});
