@@ -11,22 +11,29 @@ function init() {
 
 
   function loaditem() {
-    fetch("/image/file.JSON")
-      .then(res => res.json())
-      .then(data => {
-        let ul = document.querySelector('ul');
-        ul.innerHTML = ''; // 기존 내용을 초기화
-  
-        for (let key in data) {
-          const listItem = display(data[key], key);
-          ul.appendChild(listItem);
-        }
-  
-        // 이미지를 미리 로드
-        let images = document.querySelectorAll(".lazyload");
-        fastLazyLoad(images);
-      });
-  }
+    fetch("/image/file.json")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      ul.innerHTML = ''; // Clear existing content
+
+      for (let key in data) {
+        const listItem = display(data[key], key);
+        ul.appendChild(listItem);
+      }
+
+      // Preload images using lazy loading
+      let images = document.querySelectorAll(".lazyload");
+      fastLazyLoad(images);
+    })
+    .catch(error => {
+      console.error("Error fetching data:", error);
+    });
+}
   
   function display(child, key) {
     const li = document.createElement('li');
