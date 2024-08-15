@@ -1,6 +1,7 @@
 **TREE KIOSK SYSTEM V2**
-<img src="https://img.shields.io/badge/JavaScript
--FFFF00?style=for-the-badge&logo=#F7DF1E&logoColor=white">
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/javascript-E34F26?style=for-the-badge&logo=javascript&logoColor=white">
+
 
 // 구 버전
 [https://github.com/202420505/TREE-KIOSK](url)
