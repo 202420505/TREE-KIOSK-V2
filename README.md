@@ -40,7 +40,7 @@ BETA 버전 종료 시 웹 키오스크 사용이 중단됨을 알려드립니�
 
 >저작권
 
-[@202420505](https://github.com/202420505) [@treeentertainement](https://github.com/treeentertainment)
+[@202420505](https://github.com/202420505) [@treeentertainement](https://github.com/treeentertainment) [@treekiosk](https://github.com/treekiosk)
 
 
 >문의
