@@ -11,7 +11,7 @@
 
 - 설치 방법
 
-1. 다운로드
+1. [다운로드](https://github.com/202420505/TREE-KIOSK-V2/releases/latest)
 
 2. 설치
 
