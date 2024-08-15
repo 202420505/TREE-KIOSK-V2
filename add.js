@@ -80,4 +80,5 @@ window.onload = function() {
     event.preventDefault();
     const form = event.target;
     form.querySelector('#quantity').value = 1;
+    window.close();
   }

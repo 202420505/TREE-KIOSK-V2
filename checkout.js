@@ -86,8 +86,9 @@ function submit() {
     localStorage.removeItem("order");
 
     alert("완료 되었습니다.");
+    window.opener.postMessage("home", window.location.origin);
 
-    window.location.href = 'index.html'
+    window.close();
 }).catch((error) => {
     console.error("Error appending data: ", error);
   });

@@ -96,3 +96,9 @@ function debounce(func, wait) {
     };
 }
 
+function openwindow(name) {
+    var url = `${name}`;
+    var win = window.open(url, '_blank');
+    win.focus();
+  }
+  
