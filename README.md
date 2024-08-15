@@ -1,4 +1,10 @@
 ## TREE KIOSK SYSTEM V2
+
+<공지사항>
+
+BETA 버전 종료 시 웹 키오스크 사용이 중단됨을 알려드립니다.
+
+    
 >프로젝트 언어
 
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
