@@ -23,7 +23,7 @@ window.onload = function() {
             </div>
             <br>
             <button type="submit" class="btn btn-outline-success">확인</button>
-            <button type="reset" class="btn btn-outline-success">취소</button>
+            <button type="reset" class="btn btn-outline-warning">취소</button>
           `;
 
           form.dataset.id = decodedItemId;
@@ -82,3 +82,17 @@ window.onload = function() {
     form.querySelector('#quantity').value = 1;
     window.close();
   }
+
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  
+  auth.onAuthStateChanged(user => {
+    if (user) {
+        console.log('User is signed in:', user.email);
+        localStorage.setItem('user', user.email);
+        show('front', 'login-container');
+    } else {
+  location.href = "index.html"  
+  }
+  });

@@ -128,3 +128,31 @@ if(event.data === "home") {
   window.location.href = `index.html`;
 }
 });
+
+
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDruA1fSmRQqM-xDgJhgu9KKVGWj8GpuKQ",
+      authDomain: "tree-kiosk-system-v2.firebaseapp.com",
+      databaseURL: "https://tree-kiosk-system-v2-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "tree-kiosk-system-v2",
+      storageBucket: "tree-kiosk-system-v2.appspot.com",
+      messagingSenderId: "719927565453",
+      appId: "1:719927565453:web:caa088914a03dcb2e896c4"
+  };
+  
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  
+  auth.onAuthStateChanged(user => {
+    if (user) {
+        console.log('User is signed in:', user.email);
+        localStorage.setItem('user', user.email);
+        show('front', 'login-container');
+    } else {
+  location.href = "index.html"  
+  }
+  });
