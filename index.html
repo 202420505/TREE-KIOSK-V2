@@ -8,7 +8,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
-<link rel="stylesheet" type="text/css" href="login.css"> 
+<link rel="stylesheet" type="text/css" href="index.css"> 
 
 </head>
 
@@ -35,79 +35,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-<script type="module">
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyDruA1fSmRQqM-xDgJhgu9KKVGWj8GpuKQ",
-        authDomain: "tree-kiosk-system-v2.firebaseapp.com",
-        databaseURL: "https://tree-kiosk-system-v2-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "tree-kiosk-system-v2",
-        storageBucket: "tree-kiosk-system-v2.appspot.com",
-        messagingSenderId: "719927565453",
-        appId: "1:719927565453:web:caa088914a03dcb2e896c4"
-    };
-    
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
 
-    // Google Sign-In
-    const googleProvider = new firebase.auth.GoogleAuthProvider();
-    document.getElementById('googleLoginBtn').addEventListener('click', async () => {
-        try {
-            const result = await auth.signInWithPopup(googleProvider);
-            console.log('User is signed in:', result.user.email);
-            show('front', 'login-container');
-                } catch (error) {
-            console.error('Error during Google sign-in:', error);
-        }
-    });
-
-    // GitHub Sign-In
-    const githubProvider = new firebase.auth.GithubAuthProvider();
-    document.getElementById('githubLoginBtn').addEventListener('click', async () => {
-        try {
-            const result = await auth.signInWithPopup(githubProvider);
-            console.log('User is signed in:', result.user.email);
-            show('front', 'login-container');       
-         } catch (error) {
-            console.error('Error during GitHub sign-in:', error);
-        }
-    });
-
-    // Monitor Auth State
-    auth.onAuthStateChanged(user => {
-        if (user) {
-            console.log('User is signed in:', user.email);
-            localStorage.setItem('user', user.email);
-            show('front', 'login-container');
-        } else {
-            show('login-container', 'front');
-        }
-    });
-
-    // Click counter and logout function
-    let clickCount = 0;
-    document.getElementById('logout-link').addEventListener('click', async (e) => {
-        e.preventDefault(); // Prevent the default link behavior
-        clickCount++; // Increment click count
-
-        if (clickCount === 5) { // Check if clicked 5 times
-            try {
-                await auth.signOut();
-                console.log('User signed out after 5 clicks');
-                show('login-container', 'front'); // Show the login container after sign out
-                clickCount = 0; // Reset click count after logout
-            } catch (error) {
-                console.error('Error during sign out:', error);
-            }
-        }
-    });
-
-    function show(shown, hidden) {
-        document.getElementById(shown).style.display = 'block';
-        document.getElementById(hidden).style.display = 'none';
-    }
-</script>
+<script type="text/javascript" charset="UTF-8" src="index.js" type="module"></script>
 </body>
 </html>
