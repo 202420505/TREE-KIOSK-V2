@@ -57,8 +57,8 @@
         try {
             const result = await auth.signInWithPopup(googleProvider);
             console.log('User is signed in:', result.user.email);
-            location.href = 'main.html';
-        } catch (error) {
+            show('front', 'login-container');
+                } catch (error) {
             console.error('Error during Google sign-in:', error);
         }
     });
@@ -69,8 +69,8 @@
         try {
             const result = await auth.signInWithPopup(githubProvider);
             console.log('User is signed in:', result.user.email);
-            location.href = 'main.html';
-        } catch (error) {
+            show('front', 'login-container');       
+         } catch (error) {
             console.error('Error during GitHub sign-in:', error);
         }
     });
