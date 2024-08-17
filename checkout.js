@@ -1,6 +1,6 @@
 const li = document.getElementById("check");
 let order = JSON.parse(localStorage.getItem('order')) || []; // Load from localStorage or initialize
-
+var shop = localStorage.getItem('name');
 
 const firebaseConfig = {
     apiKey: "AIzaSyDruA1fSmRQqM-xDgJhgu9KKVGWj8GpuKQ",
@@ -14,6 +14,7 @@ const firebaseConfig = {
 
 const app = firebase.initializeApp(firebaseConfig);
 const database = firebase.database(app);
+const db = firebase.firestore();
 
 function renderCheckout() {
   li.innerHTML = '';
@@ -74,25 +75,64 @@ function toggleSendButton() {
 }
 
 function submit() {
-  var input = document.getElementById('numberDisplay').value;
-  var postListRef = firebase.database().ref("people/");
-  var newPostRef = postListRef.child(input).push();
-  newPostRef
-    .set({  
-      number: input,
-      order: order
-    }) .then(() => { 
-    clearDisplay();
-    localStorage.removeItem("order");
+    // Firestore와 Realtime Database의 참조를 각각 설정합니다.
+    var shopRef = db.collection('data').doc('shop').collection('2호점').doc("numbers");
 
-    alert("완료 되었습니다.");
-    window.opener.postMessage("home", window.location.origin);
+    // localStorage에서 'order'를 가져와 JSON으로 파싱합니다.
+    var order = JSON.parse(localStorage.getItem("order"));
 
-    window.close();
-}).catch((error) => {
-    console.error("Error appending data: ", error);
-  });
+    var input = document.getElementById('numberDisplay').value;
+
+    // Realtime Database에서 데이터 참조 설정
+    var numref = firebase.database().ref(`number/2호점`);
+    var postListRef = firebase.database().ref(`people/`);
+
+    let shopValue;
+
+    // Realtime Database에서 데이터를 가져옵니다.
+    numref.once('value')
+    .then((snapshot) => {
+        shopValue = snapshot.val();
+
+        // 'people/2호점' 경로에 데이터를 제출합니다.
+        return postListRef.set({  
+            number: input,
+            order: order  
+        });
+    })
+    .then(() => {
+        // Use 'set' with 'merge: true' to create the document if it doesn't exist
+        return shopRef.set({
+            regions: firebase.firestore.FieldValue.arrayUnion(shopValue)
+        }, { merge: true });
+    })
+    .then(() => {
+        // '2호점' 값을 증가시킵니다.
+        return numref.transaction((currentValue) => {
+            return (currentValue || 0) + 1;
+        });
+    })
+    .then(() => { 
+        // 성공 후 처리
+        clearDisplay();
+        localStorage.removeItem("order");
+
+        alert("완료 되었습니다.");
+        window.opener.postMessage("home", window.location.origin);
+
+        window.close();
+    })
+    .catch((error) => {
+        console.error("Error during submission: ", error);
+        alert("Error during submission: " + error.message);
+    });
 }
+
+
+
+
+
+  
 
 function formatPhoneNumber(value) {
     value = value.replace(/[^0-9]/g, ''); // Remove all non-digit characters
@@ -117,11 +157,7 @@ const auth = firebase.auth();
 
 
 auth.onAuthStateChanged(user => {
-    if (user) {
-        console.log('User is signed in:', user.email);
-        localStorage.setItem('user', user.email);
-        show('front', 'login-container');
-    } else {
+    if (!user) {
   location.href = "index.html"  
   }
   });

@@ -13,7 +13,7 @@
     // Initialize Firebase
     const app = firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
-
+    const db = firebase.firestore();
     // Google Sign-In
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     document.getElementById('googleLoginBtn').addEventListener('click', async () => {
@@ -21,6 +21,7 @@
             const result = await auth.signInWithPopup(googleProvider);
             console.log('User is signed in:', result.user.email);
             show('front', 'login-container');
+            setlocal( result.user.email);
                 } catch (error) {
             console.error('Error during Google sign-in:', error);
         }
@@ -30,9 +31,11 @@
     const githubProvider = new firebase.auth.GithubAuthProvider();
     document.getElementById('githubLoginBtn').addEventListener('click', async () => {
         try {
+
             const result = await auth.signInWithPopup(githubProvider);
             console.log('User is signed in:', result.user.email);
-            show('front', 'login-container');       
+            show('front', 'login-container');   
+            setlocal( result.user.email);    
          } catch (error) {
             console.error('Error during GitHub sign-in:', error);
         }
@@ -43,6 +46,7 @@
         if (user) {
             console.log('User is signed in:', user.email);
             localStorage.setItem('user', user.email);
+            setlocal( user.email);
             show('front', 'login-container');
         } else {
             show('login-container', 'front');
@@ -71,3 +75,25 @@
         document.getElementById(shown).style.display = 'block';
         document.getElementById(hidden).style.display = 'none';
     }
+
+    async function setlocal(email) {
+        const docRef = db.collection("data").doc("owner");
+        const docSnap = await docRef.get();
+      
+        if (docSnap.exists) {
+          const ownerData = docSnap.data();
+
+          // Check if the email exists directly in the document data
+          if (ownerData[email]) {
+            localStorage.setItem("name", ownerData[email][0]);
+            console.log(ownerData[email][0])
+        } else {
+            location.href = "index.html"
+        }
+      
+          return ownerData;
+        } else {
+          console.log("No such document!");
+        }
+      }
+      

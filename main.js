@@ -148,11 +148,7 @@ if(event.data === "home") {
 
   
   auth.onAuthStateChanged(user => {
-    if (user) {
-        console.log('User is signed in:', user.email);
-        localStorage.setItem('user', user.email);
-        show('front', 'login-container');
-    } else {
+    if (!user) {
   location.href = "index.html"  
   }
   });
