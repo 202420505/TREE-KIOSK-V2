@@ -112,3 +112,28 @@ function openwindow(name) {
   location.href = "index.html"  
   }
   });
+
+  async function setlocal(email) {
+    const docRef = db.collection("data").doc("owner");
+    const docSnap = await docRef.get();
+  
+    if (docSnap.exists) {
+      const ownerData = docSnap.data();
+
+      // Check if the email exists directly in the document data
+      if (ownerData[email]) {
+        localStorage.setItem("name", ownerData[email][0]);
+        console.log(ownerData[email][0])
+    } else {
+        location.href = "nouser.html"
+    }
+  
+      return ownerData;
+    } else {
+      console.log("No such document!");
+    }
+  }
+  
+  var email = localStorage.getItem('name');
+
+  setlocal(email);

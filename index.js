@@ -45,7 +45,7 @@
     auth.onAuthStateChanged(user => {
         if (user) {
             console.log('User is signed in:', user.email);
-            localStorage.setItem('user', user.email);
+            localStorage.setItem('name', user.email);
             setlocal( user.email);
             show('front', 'login-container');
         } else {
@@ -88,7 +88,7 @@
             localStorage.setItem("name", ownerData[email][0]);
             console.log(ownerData[email][0])
         } else {
-            location.href = "index.html"
+            location.href = "nouser.html"
         }
       
           return ownerData;
@@ -96,4 +96,5 @@
           console.log("No such document!");
         }
       }
+      
       
