@@ -145,6 +145,7 @@ if(event.data === "home") {
   // Initialize Firebase
   const app = firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
+  const db = firebase.firestore();
 
   
   auth.onAuthStateChanged(user => {
@@ -170,7 +171,8 @@ if(event.data === "home") {
   
       return ownerData;
     } else {
-      console.log("No such document!");
+      location.href = "nouser.html"
+
     }
   }
   

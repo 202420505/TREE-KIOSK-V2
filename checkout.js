@@ -179,10 +179,13 @@ auth.onAuthStateChanged(user => {
   
       return ownerData;
     } else {
-      console.log("No such document!");
+      location.href = "nouser.html"
+
     }
   }
   
   var email = localStorage.getItem('name');
 
   setlocal(email);
+
+  

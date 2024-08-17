@@ -1,4 +1,21 @@
 
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDruA1fSmRQqM-xDgJhgu9KKVGWj8GpuKQ",
+  authDomain: "tree-kiosk-system-v2.firebaseapp.com",
+  databaseURL: "https://tree-kiosk-system-v2-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "tree-kiosk-system-v2",
+  storageBucket: "tree-kiosk-system-v2.appspot.com",
+  messagingSenderId: "719927565453",
+  appId: "1:719927565453:web:caa088914a03dcb2e896c4"
+};
+
+
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+
 window.onload = function() {
     const urlParams = new URLSearchParams(window.location.search);
     const itemId = urlParams.get('item');
@@ -39,6 +56,9 @@ window.onload = function() {
           console.error('Item not found');
         }    
        }
+
+
+
 
   function decreaseQuantity() {
     const quantityInput = document.getElementById('quantity');
@@ -83,9 +103,6 @@ window.onload = function() {
     window.close();
   }
 
-  const app = firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-
   
   auth.onAuthStateChanged(user => {
     if (!user) {
@@ -110,10 +127,10 @@ window.onload = function() {
   
       return ownerData;
     } else {
-      console.log("No such document!");
+      location.href = "nouser.html"
+
     }
   }
-  
   var email = localStorage.getItem('name');
 
   setlocal(email);
