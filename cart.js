@@ -127,7 +127,7 @@ function openwindow(name) {
   });
 
   async function setlocal(email) {
-    const docRef = db.collection("data").doc("owner");
+    const docRef = db.collection("data").doc("owner").collection("email").doc(email);
     const docSnap = await docRef.get();
   
     if (docSnap.exists) {
