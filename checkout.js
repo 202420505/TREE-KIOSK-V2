@@ -162,30 +162,35 @@ auth.onAuthStateChanged(user => {
   }
   });
 
+  
+
+  
   async function setlocal(email) {
+    console.log("Email being used to fetch document:", email);  // 이메일 확인용 로그 추가
+
     const docRef = db.collection("data").doc("owner").collection("email").doc(email);
-    const docSnap = await docRef.get();
-  
-    if (docSnap.exists) {
-      const ownerData = docSnap.data();
 
-      // Check if the email exists directly in the document data
-      if (ownerData[email]) {
-        localStorage.setItem("name", ownerData[email][0]);
-        console.log(ownerData[email][0])
-    } else {
-        location.href = "nouser.html"
-    }
-  
-      return ownerData;
-    } else {
-      location.href = "nouser.html"
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());  // 문서 데이터 확인용 로그 추가
+            const name = doc.data().name;
+            const isActive = doc.data().active;
 
-    }
-  }
-  
-  var email = localStorage.getItem('name');
+            if (isActive !== false) {
+                localStorage.setItem("name", name);
+                localStorage.setItem("email", email);
+            } else {
+           location.href = "index.html"
+            }
+        } else {
+         location.href = "index.html"
+        }
+    }).catch((error) => {
+       location.href = "index.html"
+    });
+}
 
+document.addEventListener("DOMContentLoaded", function() {
+  var email = localStorage.getItem('email');
   setlocal(email);
-
-  
+});

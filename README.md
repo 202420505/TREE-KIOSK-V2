@@ -1,11 +1,13 @@
 ## TREE KIOSK SYSTEM V2
-    
+
+> [!CAUTION]
+> V2 업데이트 이후 데이터 저장 방식등이 바뀌었으므로 더이상 BETA 버전은 사용이 불가능 합니다.
+
 >프로젝트 언어
 
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-<img src="https://img.shields.io/badge/electron-47848F?style=for-the-badge&logo=electron&logoColor=white">
 
 >방문 수
 

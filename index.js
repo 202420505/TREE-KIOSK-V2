@@ -77,24 +77,66 @@
     }
 
     async function setlocal(email) {
-        const docRef = db.collection("data").doc("owner").collection("email").doc(email);
-        const docSnap = await docRef.get();
-      
-        if (docSnap.exists) {
-          const ownerData = docSnap.data();
 
-          // Check if the email exists directly in the document data
-          if (ownerData[email]) {
-            localStorage.setItem("name", ownerData[email][0]);
-            console.log(ownerData[email][0])
-        } else {
-            location.href = "nouser.html"
+        const docRef = db.collection("data").doc("owner").collection("email").doc(email);
+    
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                const name = doc.data().name;
+                const isActive = doc.data().active;
+    
+                if (isActive !== false) {
+                    localStorage.setItem("name", name);
+                    localStorage.setItem("email", email);
+                } else {
+                    show('nouser', 'front');
+                    show('nouser', 'login-container');
+                }
+            } else {
+                show('nouser', 'front');
+                show('nouser', 'login-container');
+            }
+        }).catch((error) => {
+            show('nouser', 'front');
+            show('nouser', 'login-container');
+        });
+    }
+    
+    
+    async function logout() {
+        try {
+            await auth.signOut(); // Firebase 세션 로그아웃
+    
+            // Google 세션 로그아웃
+            const googleLogoutUrl = 'https://accounts.google.com/Logout';
+            const win = window.open(googleLogoutUrl, '_blank');
+            if (win) {
+                win.close();
+            } else {
+                console.error('Unable to open Google logout window.');
+            }
+    
+            // 상태 초기화
+            localStorage.clear();
+            sessionStorage.clear();
+            clickCount = 0;
+    
+            console.error('finish');
+            window.location.reload();  // 강제로 새로고침하여 상태 초기화
+        } catch (error) {
+            console.error('Error during sign out:', error);
         }
+    }
       
-          return ownerData;
-        } else {
-          console.log("No such document!");
+    document.getElementById('logout-link').addEventListener('click', async (e) => {
+        e.preventDefault(); // Prevent the default link behavior
+        clickCount++; // Increment click count
+    
+        if (clickCount === 5) { // Check if clicked 5 times
+            try {
+                await logout();
+            } catch (error) {
+                console.error('Error during sign out:', error);
+            }
         }
-      }
-      
-      
+    });
