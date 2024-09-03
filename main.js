@@ -197,38 +197,3 @@ if(event.data === "home") {
 window.location.href = `index.html`;
 }
 });
-
-
-
-
-auth.onAuthStateChanged(user => {
-  if (!user) {
-location.href = "index.html"  
-}
-});
-
-async function setlocal(email) {
-  const docRef = db.collection("data").doc("owner").collection("email").doc(email);
-  const docSnap = await docRef.get();
-
-  if (docSnap.exists) {
-    const ownerData = docSnap.data();
-
-    // Check if the email exists directly in the document data
-    if (ownerData[email]) {
-      localStorage.setItem("name", ownerData[email][0]);
-      console.log(ownerData[email][0])
-  } else {
-      location.href = "nouser.html"
-  }
-
-    return ownerData;
-  } else {
-    location.href = "nouser.html"
-
-  }
-}
-
-var email = localStorage.getItem('name');
-
-setlocal(email);

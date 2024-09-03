@@ -1,6 +1,6 @@
 const li = document.getElementById("check");
 let order = JSON.parse(localStorage.getItem('order')) || []; // Load from localStorage or initialize
-var shop = localStorage.getItem('name');
+var shop =  localStorage.getItem('name').replace(/"/g, '');
 
 const firebaseConfig = {
     apiKey: "AIzaSyDruA1fSmRQqM-xDgJhgu9KKVGWj8GpuKQ",
@@ -76,7 +76,7 @@ function toggleSendButton() {
 
 function submit() {
     // Firestore와 Realtime Database의 참조를 각각 설정합니다.
-    var shopRef = db.collection('data').doc('shop').collection('2호점').doc("numbers");
+    var shopRef = db.collection('data').doc('shop').collection(`${shop}`).doc("numbers");
 
     // localStorage에서 'order'를 가져와 JSON으로 파싱합니다.
     var order = JSON.parse(localStorage.getItem("order"));
@@ -84,7 +84,7 @@ function submit() {
     var input = document.getElementById('numberDisplay').value;
 
     // Realtime Database에서 데이터 참조 설정
-    var numref = firebase.database().ref(`number/2호점`);
+    var numref = firebase.database().ref(`number/${shop}`);
     var postListRef = firebase.database().ref(`people/`);
 
     let shopValue;
@@ -95,7 +95,7 @@ function submit() {
         shopValue = snapshot.val();
 
         // 'people/2호점' 경로에 데이터를 제출합니다.
-        return postListRef.set({  
+        return postListRef.push({  
             number: input,
             order: order  
         });
